@@ -1,0 +1,35 @@
+#!/usr/bin/env python3
+
+import sys
+from sympy import factorint
+
+def factor_large_number(n):
+    """
+    Factor a large number into its prime factors.
+
+    Args:
+        n (int): The large number to factor.
+
+    Returns:
+        dict: A dictionary containing the prime factors and their exponents.
+    """
+    return factorint(n)
+
+def main(file_path):
+    """
+    Factor the number from the file and print its prime factors.
+
+    Args:
+        file_path (str): The path to the file containing the number.
+    """
+    with open(file_path, 'r') as file:
+        num = int(file.read().strip())
+        factors = factor_large_number(num)
+        print(f"The prime factors of {num} are: {factors}")
+
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("Usage: rsa_factor <file>")
+        sys.exit(1)
+    file_path = sys.argv[1]
+    main(file_path)

@@ -1,0 +1,42 @@
+#!/usr/bin/env python3
+
+import sys
+
+# This is a factor challenge for RSA
+
+
+def factorize(n):
+    """
+    Factorize a number into two smaller numbers.
+
+    Args:
+        n (int): The number to factorize.
+
+    Returns:
+        tuple: A tuple containing the factors of the number.
+    """
+    for i in range(2, int(n**0.5) + 1):
+        if n % i == 0:
+            return i, n // i
+    return None
+
+def main(file_path):
+    """
+    Read numbers from the file, factorize each number, and print the factorizations.
+
+    Args:
+        file_path (str): The path to the file containing numbers.
+    """
+    with open(file_path, 'r') as file:
+        for line in file:
+            num = int(line.strip())
+            factors = factorize(num)
+            if factors:
+                print(f"{num}={factors[0]}*{factors[1]}")
+
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("Usage: factors <file>")
+        sys.exit(1)
+    file_path = sys.argv[1]
+    main(file_path)
